@@ -1,0 +1,16 @@
+#+ATTR_HTML: :width 150px
+[[./automate-stuff-images/9781593279936.jpg]]
+
+#+begin_src ipython :session automate :results output :eval yes
+import os
+import glob
+import subprocess
+chs = glob.glob("ch*.xhtml")
+# print(chs)
+
+for ch in chs:
+    assert ch.endswith("xhtml")
+    cmd = f"pandoc --wrap=preserve {ch} -o {ch.replace('.xhtml', '.org')}"
+    subprocess.run(cmd, shell=True)
+    #+end_src
+
