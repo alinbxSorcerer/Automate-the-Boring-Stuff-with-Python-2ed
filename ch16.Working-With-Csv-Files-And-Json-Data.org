@@ -116,7 +116,7 @@ First, call open() and pass it 'w' to open a file in write mode ➊. This will c
 
 On Windows, you'll also need to pass a blank string for the open() function's newline keyword argument. For technical reasons beyond the scope of this book, if you forget to set the newline argument, the rows in /output.csv/ will be double-spaced, as shown in [[file:ch16.xhtml#ch16fig01][Figure 16-1]].
 
-[[../images/16fig01.jpg]]
+[[./automate-stuff-images/16fig01.jpg]]
 
 /Figure 16-1: If you forget the newline='' keyword argument in open(), the CSV file will be double-spaced./
 
@@ -236,7 +236,6 @@ Notice that the order of the key-value pairs in the dictionaries you passed to w
 Notice also that any missing keys, such as 'Pet' in {'Name': 'Bob', 'Phone': '555-9999'}, will simply be empty in the CSV file.
 
 ** Project: Removing the Header from CSV Files
-
 
 Say you have the boring job of removing the first line from several hundred CSV files. Maybe you'll be feeding them into an automated process that requires just the data and not the headers at the top of the columns. You /could/ open each file in Excel, delete the first row, and resave the file---but that would take hours. Let's write a program to do it instead.
 
@@ -402,17 +401,21 @@ Python's json module handles all the details of translating between a string wit
 
 *** Reading JSON with the loads() Function
 
-
 To translate a string containing JSON data into a Python value, pass it to the json.loads() function. (The name means “load string,” not “loads.”) Enter the following into the interactive shell:
+#+begin_src ipython :session alinbx :results output
+stringOfJsonData = '{"name": "Zophie", "isCat": true, "miceCaught": 0, "felineIQ": null}'
+import json
+jsonDataAsPythonValue = json.loads(stringOfJsonData)
+print(jsonDataAsPythonValue)
+#+end_src
 
->>> stringOfJsonData = '{"name": "Zophie", "isCat": true, "miceCaught": 0,
-"felineIQ": null}'
->>> import json
->>> jsonDataAsPythonValue = json.loads(stringOfJsonData)
->>> jsonDataAsPythonValue
-{'isCat': True, 'miceCaught': 0, 'name': 'Zophie', 'felineIQ': None}
+#+RESULTS:
+: {'name': 'Zophie', 'isCat': True, 'miceCaught': 0, 'felineIQ': None}
+# load string, 此处解释得很及时,
+
 
 After you import the json module, you can call loads() and pass it a string of JSON data. Note that JSON strings always use double quotes. It will return that data as a Python dictionary. Python dictionaries are not ordered, so the key-value pairs may appear in a different order when you print jsonDataAsPythonValue.
+# 能表示出来一个便是获得了一个.
 
 *** Writing JSON with the dumps() Function
 

@@ -12,5 +12,12 @@ for ch in chs:
     assert ch.endswith("xhtml")
     cmd = f"pandoc --wrap=preserve {ch} -o {ch.replace('.xhtml', '.org')}"
     subprocess.run(cmd, shell=True)
-    #+end_src
+#+end_src
 
+#+BEGIN_SRC shell :results drawer
+find ~ -iregex ".*\.md$"  | while read line; do grep "automate" "$line"; done
+#+END_SRC
+
+#+RESULTS:
+:results:
+:end:

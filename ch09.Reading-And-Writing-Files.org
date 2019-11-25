@@ -1,12 +1,15 @@
 * 9.Reading And Writing Files
 
-Variables are a fine way to store data while your program is running, but if you want your data to persist even after your program has finished, you need to save it to a file. You can think of a file's contents as a single string value, potentially gigabytes in size. In this chapter, you will learn how to use Python to create, read, and save files on the hard drive.
+Variables are a fine way to store data while your program is running, but if you want your data to persist even after your program has finished, you need to save it to a file. You can think of a file's contents as a single string value, potentially gigabytes in size.
+# 最初是从string里认识file.
+In this chapter, you will learn how to use Python to create, read, and save files on the hard drive.
 
 ** Files and File Paths
 
 A file has two key properties: a /filename/ (usually written as one word) and a /path/. The path specifies the location of a file on the computer. For example, there is a file on my Windows laptop with the filename /project.docx/ in the path /C:UsersAlDocuments/. The part of the filename after the last period is called the file's /extension/ and tells you a file's type. The filename /project.docx/ is a Word document, and /Users/, /Al/, and /Documents/ all refer to /folders/ (also called /directories/). Folders can contain files and other folders. For example, /project.docx/ is in the /Documents/ folder, which is inside the /Al/ folder, which is inside the /Users/ folder. [[file:ch09.xhtml#ch09fig01][Figure 9-1]] shows this folder organization.
 
-[[../images/09fig01.jpg]]
+[[file:automate-stuff-images/09fig01.jpg]]
+
 /Figure 9-1: A file in a hierarchy of folders/
 
 The /C:/ part of the path is the /root folder/, which contains all other folders. On Windows, the root folder is named /C:/ and is also called the /C: drive/. On macOS and Linux, the root folder is ///. In this book, I'll use the Windows-style root folder, /C:/. If you are entering the interactive shell examples on macOS or Linux, enter / instead.
@@ -94,11 +97,11 @@ TypeError: unsupported operand type(s) for /: 'str' and 'str'
 
 Python evaluates the / operator from left to right and evaluates to a Path object, so either the first or second leftmost value must be a Path object for the entire expression to evaluate to a Path object. Here's how the / operator and a Path object evaluate to the final Path object.
 
-[[../images/09fig01a.jpg]]
+[[file:automate-stuff-images/09fig01a.jpg]]
 
 If you see the TypeError: unsupported operand type(s) for /: 'str' and 'str' error message shown previously, you need to put a Path object on the left side of the expression.
 
-The / operator replaces the older os.path.join() function, which you can learn more about from /[[https://docs.python.org/3/library/os.path.html#os.path.join]]/.
+The / operator replaces the older os.path.join() function, which you can learn more about from [[https://docs.python.org/3/library/os.path.html#os.path.join]]/.
 
 *** The Current Working Directory
 
@@ -160,7 +163,7 @@ There are also the /dot/ (.) and /dot-dot/ (..) folders. These are not real fold
 
 [[file:ch09.xhtml#ch09fig02][Figure 9-2]] is an example of some folders and files. When the current working directory is set to /C:bacon/, the relative paths for the other folders and files are set as they are in the figure.
 
-[[../images/09fig02.jpg]]
+[[../automate-stuff-images/09fig02.jpg]]
 
 /Figure 9-2: The relative paths for folders and files in the working directory/ C:bacon
 
@@ -466,12 +469,11 @@ The older os.path module can accomplish the same task with the os.path.exists(pa
 
 ** The File Reading/Writing Process
 
-
 Once you are comfortable working with folders and relative paths, you'll be able to specify the location of files to read and write. The functions covered in the next few sections will apply to plaintext files. /Plaintext files/ contain only basic text characters and do not include font, size, or color information. Text files with the /.txt/ extension or Python script files with the /.py/ extension are examples of plaintext files. These can be opened with Windows's Notepad or macOS's TextEdit application. Your programs can easily read the contents of plaintext files and treat them as an ordinary string value.
 
 /Binary files/ are all other file types, such as word processing documents, PDFs, images, spreadsheets, and executable programs. If you open a binary file in Notepad or TextEdit, it will look like scrambled nonsense, like in [[file:ch09.xhtml#ch09fig06][Figure 9-6]].
 
-y[[../images/09fig06.jpg]]
+[[../images/09fig06.jpg]]
 
 /Figure 9-6: The Windows calc.exe program opened in Notepad/
 
@@ -581,16 +583,20 @@ As of Python 3.6, you can also pass a Path object to the open() function instead
 
 ** Saving Variables with the shelve Module
 
-
 You can save variables in your Python programs to binary shelf files using the shelve module. This way, your program can restore data to variables from the hard drive. The shelve module will let you add Save and Open features to your program. For example, if you ran a program and entered some configuration settings, you could save those settings to a shelf file and then have the program load them the next time it is run.
 
 Enter the following into the interactive shell:
 
->>> import shelve
->>> shelfFile = shelve.open('mydata')
->>> cats = ['Zophie', 'Pooka', 'Simon']
->>> shelfFile['cats'] = cats
->>> shelfFile.close()
+#+begin_src ipython :session alinbx :results output
+import shelve
+shelfFile = shelve.open('mydata')
+cats = ['Zophie', 'Pooka', 'Simon']
+shelfFile['cats'] = cats
+shelfFile.close()
+#+end_src
+
+#+RESULTS:
+
 
 To read and write data using the shelve module, you first import shelve. Call shelve.open() and pass it a filename, and then store the returned shelf value in a variable. You can make changes to the shelf value as if it were a dictionary. When you're done, call close() on the shelf value. Here, our shelf value is stored in shelfFile. We create a list cats and write shelfFile['cats'] = cats to store the list in shelfFile as a value associated with the key 'cats' (like in a dictionary). Then we call close() on shelfFile. Note that as of Python 3.7, you have to pass the open() shelf method filenames as strings. You can't pass it Path object.
 
@@ -949,7 +955,6 @@ In previous chapters, you used the clipboard as a way of getting large amounts o
 In the next chapter, you will learn how to handle the files themselves, by copying them, deleting them, renaming them, moving them, and more.
 
 ** Practice Questions
-
 
 [[file:app03.xhtml#ch09ans1][1]]. What is a relative path relative to?
 

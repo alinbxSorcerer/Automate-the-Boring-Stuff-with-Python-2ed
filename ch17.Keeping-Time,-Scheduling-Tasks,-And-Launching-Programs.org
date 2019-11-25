@@ -5,7 +5,7 @@ Running programs while you're sitting at your computer is fine, but it's also us
 
 You can also write programs that launch other programs on a schedule by using the subprocess and threading modules. Often, the fastest way to program is to take advantage of applications that other people have already written.
 
-** *The time Module
+** The time Module
 
 
 Your computer's system clock is set to a specific date, time, and time zone. The built-in time module allows your Python programs to read the system clock for the current time. The time.time() and time.sleep() functions are the most useful in the time module.
